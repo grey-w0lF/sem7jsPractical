@@ -1,0 +1,57 @@
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+
+
+entity usr is
+    Port ( clk,rst : in  STD_LOGIC;
+           s : in  STD_LOGIC_VECTOR (3 downto 0);
+           m : in  STD_LOGIC_VECTOR (1 downto 0);
+           y : out  STD_LOGIC_VECTOR (3 downto 0));
+end usr;
+
+architecture Behavioral of usr is
+signal t : std_logic_vector(3 downto 0);
+
+begin
+   process(clk,rst)
+	begin
+	if(rst='1') then
+	y<="0000";
+	elsif(clk'event and clk= '1') then
+	case(m) is
+	when "00" =>
+	t(3)<=s(0);
+	t(2)<=t(3);
+	t(1)<=t(2);
+	t(0)<=t(1);
+	y(0)<=t(0);
+	
+	when "01" =>
+	t(3)<=s(0);
+	t(2)<=t(3);
+	t(1)<=t(2);
+	t(0)<=t(1);
+	y<=t;
+	
+	
+	when "10" =>
+	t<=s;
+	y<=t;
+	
+	when "11" =>
+	t<=s;
+	t(2)<=t(3);
+	t(1)<=t(2);
+	t(0)<=t(1);
+	y(3)<=t(0);
+	
+	when others =>NULL;
+	end case;
+	end if;
+	end process;
+	
+
+end Behavioral;
+

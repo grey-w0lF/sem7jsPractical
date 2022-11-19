@@ -1,0 +1,10 @@
+with sel select
+out <= A+B when "000",
+       A-B when "001",
+       A and B when "010",
+       A nand B when "011",
+       A xor B  when "100",
+       A xnor B When "101",
+       A or B when "110",
+       A when others;
+       
